@@ -49,4 +49,4 @@
 
 
 ### 
-![文件的排布](http)
+![文件的排布](https://github.com/Panda-X6646/Node-Mongodb_Operation-The-Acrticle/blob/master/img/%E6%96%87%E4%BB%B6.PNG)
