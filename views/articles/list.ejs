@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章列表</title>
+    <link rel="stylesheet" href="/stylesheets/articles/list.css">
+</head>
+<body>
+    <script src="/javascripts/jquery2-1-4.js"></script>
+
+    <!-- 直接跳转到文章发布的静态页面 -->
+    <a href="/articles/new.html">新增</a>
+     <table cellpandding="0" cellspacing="0">
+        <tr>
+            <td>标题</td>
+            <td>来源</td>
+            <td>作者</td>
+            <td>时间</td>
+            <td class="control">操作</td>
+        </tr>
+
+        <!-- 遍历出所有文章，并将每篇文章的信息加载到页面上 -->
+        <% articles.forEach(function (article) { %>
+            <tr>
+                <td>
+                    <a href="/articles/view.html?id=<%= article.id %>">
+                        <%= article.title %>
+                    </a>
+                </td>
+                <td class="content"><%= article.source %></td>
+                <td class="content"><%= article.author %></td>
+                <td class="content"><%= article.createTime %></td>
+                <td>
+
+                    <!-- 在某篇文章点击修改跳转到/articles/edit.html的静态页面，并将该篇文章在数据库中的id拼接到地址栏 -->
+                    <a href="/articles/edit.html?id=<%= article.id %>">修改</a>
+
+                    
+                    <a class="del" data-id="<%= article.id %>" href="#">删除</a>
+                </td>
+            </tr>
+        <% }) %>
+     </table>
+
+     <script>
+        $(function () {
+
+            // 点击删除按钮，将该文章的id拼接到地址栏发送delete请求，服务器可以根据id查询并删除文章
+            $('.del').on('click', function () {
+                var id = $(this).data('id');
+                $.ajax({
+                    url:'articles/' + id,
+                    type: 'delete',
+                    success: function (data) {
+                        alert(data.msg);
+
+                        // 跳转页面
+                        location.href = '/api/articles';
+                    }
+                })
+            })
+        })
+     </script>
+</body>
+</html>

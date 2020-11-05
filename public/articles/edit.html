@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章修改</title>
+    <link rel="stylesheet" href="../stylesheets/articles/eitd.css">
+</head>
+<body>
+    <script src="../javascripts/jquery2-1-4.js"></script>
+
+    <form id="articleForm">
+        <table cellpandding="0" cellspacing="0">
+            <tr>
+                <td class="leftlable">标题</td>
+                <td><input type="text" name="title" id="title"></td>
+            </tr>
+            <tr>
+                <td class="leftlable">作者</td>
+                <td><input type="text" name="author" id="author"></td>
+            </tr>
+            <tr>
+                <td class="leftlable">来源</td>
+                <td><input type="text" name="source" id="source"></td>
+            </tr>
+            <tr>
+                <td class="leftlable">内容</td>
+                <td><textarea name="content" id="content" rows="5" cols="20"></textarea> </td>
+            </tr>
+            <tr>
+                <td class="leftlable">&nbsp;</td>
+                <td><input type="button" id="btnSave" value="发布"></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        var id = location.href.split('=')[1];
+        $(function () {
+            $.get('/api/articles/' + id, function (data) {
+                $('#title').val(data.title);
+                $('#author').val(data.author);
+                $('#source').val(data.source);
+                $('#content').val(data.content);
+            })
+
+            $('#btnSave').on('click', function () {
+             $.ajax({
+                    url: '/api/articles/' + id,
+                    type: 'put',
+                    data: $('#articleForm').serialize(),
+                    success: (data) => {
+                        alert(data.msg);
+                        location.href = '/api/articles';
+                    }
+                })
+            })
+        
+        })
+
+        
+    </script>
+</body>
+</html>

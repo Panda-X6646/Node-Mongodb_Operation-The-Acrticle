@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情</title>
+    <link rel="stylesheet" href="../stylesheets/articles/view.css">
+</head>
+<body>
+    <script src="../javascripts/jquery2-1-4.js"></script>
+    <div id="wrapper">
+        <h1 id="title"></h1>
+        <p>
+            作者：<span id="author"></span>
+            来源：<span id="source"></span>
+            作发布时间：<span id="creatTime"></span>
+            <div id="content"></div>
+        </p>
+    </div>
+    <script>
+        // 首先客户端跳转来的是一个没有文章信息的空白页面
+        $(function () {
+
+            // 当页面加载完后，取出拼接在地址栏的id值
+            var id = location.href.split('=')[1];
+
+            // 再将id拼接到路径上发送请求，服务器通过id来查找到文章
+            $.get('/api/articles/' + id, function (data) {
+                // console.log(data);
+
+                // 将服务器从数据库查来的数据通过DOM操作添加到页面上
+                $('#title').html(data.title);
+                $('#author').html(data.author);
+                $('#source').html(data.source);
+                $('#creatTime').html(data.createTime);
+                $('#content').html(data.content);
+            })
+        })
+    </script>
+</body>
+</html>

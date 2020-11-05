@@ -1,0 +1,38 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+table td{
+    height: 30px;
+    border: 1px solid rgb(179, 179, 179);
+    padding-right: 5px;
+    font-family:'微软雅黑';
+}
+table td.leftlable {
+    width: 100px;
+    text-align: center;
+}
+
+table td input {
+    width: 200px;
+    height: 20px;
+    margin-left: 5px;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+table td textarea {
+    width: 500px;
+    height: 200px;
+    margin: 5px;
+    border: 1px solid rgb(179, 179, 179);
+}
+
+#btnSave {
+    float: right;
+    width: 80px;
+    height: 20px;
+    background-color: darkorange;
+    color: #fff;
+    border: 1px solid #ff8c00;
+}
